@@ -5,16 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import CustomFormField from '../CustomFormField';
 
 export enum FormFieldType {
@@ -28,9 +19,7 @@ export enum FormFieldType {
 }
 
 const formSchema = z.object({
-  fullName: z.string(),
-  email: z.string(),
-  phone: z.number(),
+  username: z.string(),
 });
 
 const PatientForm = () => {
@@ -57,27 +46,21 @@ const PatientForm = () => {
           control={form.control}
           name="name"
           label="Full name"
-          placeholder="John Doe"
+          placeholder="johndoe@noemail.com"
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
 
-        {/* <FormField
+        <CustomFormField
+          fieldType={FormFieldType.INPUT}
           control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
+          name="email"
+          label="Email"
+          placeholder="John Doe"
+          iconSrc="/assets/icons/email.svg"
+          iconAlt="email"
+        />
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>
