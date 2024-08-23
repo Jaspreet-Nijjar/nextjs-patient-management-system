@@ -20,7 +20,8 @@ export enum FormFieldType {
 }
 
 const formSchema = z.object({
-  username: z.string(),
+  name: z.string(),
+  email: z.string(),
 });
 
 const PatientForm = () => {
@@ -29,7 +30,8 @@ const PatientForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      name: '',
+      email: '',
     },
   });
 
