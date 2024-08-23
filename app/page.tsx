@@ -1,5 +1,4 @@
 import PatientForm from '@/components/forms/PatientForm';
-import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -28,7 +27,14 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Button>Click Me</Button>
+
+      <Image
+        src="/assets/images/onboarding-img.png"
+        alt="patient"
+        width={1000}
+        height={1000}
+        className="side-img max-w-[50%]"
+      />
     </div>
   );
 }
