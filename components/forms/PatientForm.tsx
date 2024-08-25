@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 
 import { Form } from '@/components/ui/form';
@@ -24,6 +25,8 @@ export enum FormFieldType {
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof userFormValidation>>({
     resolver: zodResolver(userFormValidation),
     defaultValues: {
@@ -41,11 +44,15 @@ const PatientForm = () => {
         email,
       };
 
+      console.log('userData', userData);
+
       const user = await createUser(userData);
 
-      //Will pass the user data to Appwrite
+      if (user) router.push(`/patients/${user.$id}/register`);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
   return (
@@ -61,7 +68,7 @@ const PatientForm = () => {
           control={form.control}
           name="name"
           label="Full name"
-          placeholder="johndoe@noemail.com"
+          placeholder="John Doe"
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
@@ -71,7 +78,7 @@ const PatientForm = () => {
           control={form.control}
           name="email"
           label="Email"
-          placeholder="John Doe"
+          placeholder="johndoe@noemail.com"
           iconSrc="/assets/icons/email.svg"
           iconAlt="email"
         />
