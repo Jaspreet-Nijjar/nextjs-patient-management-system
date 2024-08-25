@@ -8,6 +8,7 @@ import { Form } from '@/components/ui/form';
 import CustomFormField from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
 import { useState } from 'react';
+import { userFormValidation } from '@/lib/validation';
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -19,24 +20,30 @@ export enum FormFieldType {
   SKELETON = 'skeleton',
 }
 
-const formSchema = z.object({
-  name: z.string(),
-  email: z.string(),
-});
-
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof userFormValidation>>({
+    resolver: zodResolver(userFormValidation),
     defaultValues: {
       name: '',
       email: '',
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit({ name, email }: z.infer<typeof userFormValidation>) {
+    setIsLoading(true);
+
+    try {
+      const userData = {
+        name,
+        email,
+      };
+
+      //Will pass the user data to Appwrite
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <Form {...form}>
