@@ -9,6 +9,7 @@ import CustomFormField from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
 import { useState } from 'react';
 import { userFormValidation } from '@/lib/validation';
+import { createUser } from '@/lib/actions/patient.actions';
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -39,6 +40,8 @@ const PatientForm = () => {
         name,
         email,
       };
+
+      const user = await createUser(userData);
 
       //Will pass the user data to Appwrite
     } catch (error) {
