@@ -1,3 +1,4 @@
+import RegisterForm from '@/components/forms/RegisterForm';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,7 +15,7 @@ const Register = () => {
             className="mb-12 h-10 w-fit"
           />
 
-          {/* RegisterForm */}
+          <RegisterForm />
 
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-dark-600 xl:text-left">
