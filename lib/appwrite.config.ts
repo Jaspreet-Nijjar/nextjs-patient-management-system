@@ -11,8 +11,6 @@ export const {
   NEXT_PUBLIC_ENDPOINT,
 } = process.env;
 
-console.log('AppWrite Endpoint:', NEXT_PUBLIC_ENDPOINT);
-
 const client = new sdk.Client();
 
 client
