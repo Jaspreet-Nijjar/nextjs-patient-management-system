@@ -5,13 +5,14 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 
-import { Form } from '@/components/ui/form';
+import { Form, FormControl } from '@/components/ui/form';
 import CustomFormField from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
 import { useState } from 'react';
 import { userFormValidation } from '@/lib/validation';
 import { createUser } from '@/lib/actions/patient.actions';
 import { FormFieldType } from './PatientForm';
+import { RadioGroup } from '../ui/radio-group';
 
 const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -88,6 +89,31 @@ const RegisterForm = ({ user }: { user: User }) => {
             name="phone"
             label="Phone number"
             placeholder="(555) 123-4567"
+          />
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FormFieldType.DATE_PICKER}
+            control={form.control}
+            name="birthDate"
+            label="Date of Birth"
+          />
+
+          <CustomFormField
+            fieldType={FormFieldType.SKELETON}
+            control={form.control}
+            name="gender"
+            label="Gender"
+            renderSkeleton={(field) => (
+              <FormControl>
+                <RadioGroup
+                  className="flex h-11 gap-6 xl:justify-between"
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                ></RadioGroup>
+              </FormControl>
+            )}
           />
         </div>
 
